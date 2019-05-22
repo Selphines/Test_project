@@ -1,0 +1,19 @@
+#!/usr/bin/python
+import psutil, sys
+
+if len(sys.argv) > 1:
+    if (sys.argv[1] == 'cpu'):
+        for cpu in psutil.cpu_times()._fields:
+            valuec = getattr(psutil.cpu_times(), cpu)
+            print ('System.cpu.%-11s : %2s' % (cpu,valuec))
+
+    if  (sys.argv[1] == 'mem'):
+         for mem in psutil.virtual_memory()._fields:
+             valuem = getattr(psutil.virtual_memory(), mem)
+             print ('Virtual.%-11s : %2s' % (mem,valuem))
+         for sw in psutil.swap_memory()._fields:
+             values = getattr(psutil.swap_memory(), sw)
+             print ('Swap.%-14s : %2s' % (sw,values))
+
+else:
+    print('Enter value. cpu of mem')
